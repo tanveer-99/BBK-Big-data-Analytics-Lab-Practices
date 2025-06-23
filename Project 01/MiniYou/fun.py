@@ -1,6 +1,7 @@
 # All the functions must be written in this file
 import csv
 
+# this function loads the csv file as dictionary and stores the rows in a list with conventional return statement
 def mini_load_csv_dict(input_dict):
     filename = input_dict.get('data')
     if not filename:
@@ -16,6 +17,7 @@ def mini_load_csv_dict(input_dict):
         return []
     return data_rows
 
+# this function loads the csv file as dictionary and stores the rows in a list with yield statement
 
 def mini_load_csv_yield(input_dict):
     filename = input_dict.get("data")
@@ -31,3 +33,15 @@ def mini_load_csv_yield(input_dict):
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found.")
         return 
+    
+
+def mini_len(input_data, col):
+    count = 0
+    missing = 0
+    for row in mini_load_csv_yield(input_data):
+        if col not in row:
+            return {"Exists": False}
+        if row[col] in [None, ""]:
+            missing += 1
+        count += 1
+    return {"Exists": True, "Column": col, "Number of records": count, "Number of missing records": missing}
