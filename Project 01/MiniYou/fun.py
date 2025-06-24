@@ -63,3 +63,18 @@ def mini_search(input_data, col, value):
     return {"Exists": False, "Column": col, "Value": value} 
 
 # ----------------------------------------
+
+# proportion of a specific value within a given column
+def mini_proportion_count(input_data, col, value):
+    count = 0
+    total = 0
+    rows = mini_load_csv_dict(input_data)
+    if col not in rows[0]:
+        return {"Exists": False}
+    for row in rows:
+        total += 1
+        if value == row.get(col):
+            count += 1
+        
+    proportion_value = count/total
+    return {"Exists": True, "Column": col, "Value": value, "Proportion": proportion_value}

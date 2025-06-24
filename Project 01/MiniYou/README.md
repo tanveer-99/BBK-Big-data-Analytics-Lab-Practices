@@ -110,3 +110,23 @@ If not exists: ` {"Exists": False, "Column": "Occupation", "Value": "Lawyer"}  `
 Time: `O(n)`
 
 Space: `O(n)`
+
+## Task 03
+` mini_proportion_count() ` takes the column name and value as input and finds the proportion of the value in the entire column. The proportion is calculated as follows: if 3 out of 10 rows have the value "Engineer", the proportion is 3/10 = 0.3.
+
+> `return` is used intead of `yield` as we need to traverse through everything and give a final aggregated value, rather than processing one by one
+
+Usage:
+```python
+print(fun.mini_proportion_count(input_data, "Heart Rate", '70'))
+```
+
+Output:
+<br/>
+If exists: `{'Exists': True, 'Column': 'Heart Rate', 'Value': '70', 'Proportion': 0.20320855614973263}`
+<br/>
+If not exists: `{'Exists': False}`
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`

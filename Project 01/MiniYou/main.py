@@ -23,3 +23,8 @@ for movie in fun.mini_load_csv_yield(input_data):
 # searches for the specific value in a given column
 # print(fun.mini_search(input_data, "Occupation", 'Lawyer'))
 
+# ------------------------------
+
+#calculate the proportion
+print(fun.mini_proportion_count(input_data, "Heart Rates", '70'))
+
