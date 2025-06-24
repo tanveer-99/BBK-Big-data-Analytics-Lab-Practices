@@ -23,7 +23,7 @@ The two datasets are discussed below:
 
 The function takes the csv dataset as a dictionary and loads it with the ` csv.DictReader() `. This function uses the return method to return all the rows in a single list. 
 <pre markdown>
-def mini_load_csv_dict(input_dict):
+``` def mini_load_csv_dict(input_dict):
     filename = input_dict.get('data')
     if not filename:
         raise ValueError("No 'data' key provided in the input dictionary.")
@@ -37,6 +37,7 @@ def mini_load_csv_dict(input_dict):
         print(f"Error: File '{filename}' not found.")
         return []
     return data_rows
+```
 </pre>
 Time complexity: ` O(n) `: looping over every row once, which is  O(1), so O(n). </br>
 Space complexity: ` O(n) `: creating the list makes it take the same space as the rows in the dataset.
@@ -44,6 +45,7 @@ Space complexity: ` O(n) `: creating the list makes it take the same space as th
 ### mini_load_csv_yield()
 This function does the same with the ` yield ` method.
 <pre markdown>
+```
 def mini_load_csv_yield(input_dict):
     filename = input_dict.get("data")
 
@@ -58,6 +60,7 @@ def mini_load_csv_yield(input_dict):
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found.")
         return 
+```
 </pre>
 Time complexity: ` O(n) `: same as the return method
 <br/>
@@ -74,8 +77,10 @@ Space complexity: ` O(1) `: we process one at a time and not using any list. so 
 
 Usage:
 <pre markdown>
+```
 input_data = {"data": "datasets/Sleep_health_and_lifestyle_dataset.csv"}
 print(fun.mini_len(input_data, 'Gender'))
+```
 </pre>
 
 Output: </br>
@@ -93,8 +98,10 @@ Space complexity: `O(1)`, one row at a time from the generator, no need of extra
 > Here `return` is used as we want to exit immediately upon finding the first match
 
 Usage:
-<pre>
+<pre markdown>
+```
 print(fun.mini_search(input_data, "Occupation", 'Lawyer'))
+```
 </pre>
 
 Output:
