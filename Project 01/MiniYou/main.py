@@ -37,3 +37,6 @@ for movie in fun.mini_load_csv_yield(input_data):
 # takes a numeric column and finds the average
 # print(fun.mini_average(input_data, 'Daily Steps'))
 
+#---------------------------
+# extracts the Person ID , Quality of Sleep , and Physical Activity Level only for individuals whose occupation is Teacher
+print(list(fun.mini_extract_metrics(input_data, {"Col1":"Person ID", "Col2":"Quality of Sleep", "Col3":"Physical Activity Level"})))

@@ -109,3 +109,14 @@ def mini_average(input_data, col):
         except (TypeError, ValueError):
             continue
     return {"Exists": True, "Column": col, "Average": round(total/count, 2)}
+
+#----------------------------------
+# extracts the Person ID , Quality of Sleep , and Physical Activity Level only for individuals whose occupation is Teacher
+def mini_extract_metrics(input_data, columns):
+    for row in mini_load_csv_yield(input_data):
+        if row.get("Occupation").lower() == 'teacher':
+            yield {
+                columns.get('Col1'): row.get(columns.get('Col1')),
+                columns.get('Col2'): row.get(columns.get('Col2')),
+                columns.get('Col3'): row.get(columns.get('Col3'))
+            }

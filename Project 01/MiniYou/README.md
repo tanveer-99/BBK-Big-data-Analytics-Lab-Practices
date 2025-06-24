@@ -172,3 +172,26 @@ If not exists: ` {"Exists": False, "Column": `Daily Steps`} `
 
 Time Complexity: `O(N)` <br/>
 Space Complexity: `O(N)`
+
+## Task 06
+`mini_extract_metrics()` takes a dictionary of column names and extracts them on the basis of 'Occupation'='teacher'
+
+> `yield` is used to process each item one by one, as we don't need a final aggregate value. That makes the code memory-efficient.
+
+Usage: 
+```python
+print(list(fun.mini_extract_metrics(input_data, {"Col1":"Person ID", "Col2":"Quality of Sleep", "Col3":"Physical Activity Level"})))
+```
+
+Example Output: <br/>
+```python
+[
+    {'Person ID': '7', 'Quality of Sleep': '6', 'Physical Activity Level': '40'}, 
+    {'Person ID': '83', 'Quality of Sleep': '7', 'Physical Activity Level': '40'}, 
+    {'Person ID': '84', 'Quality of Sleep': '7', 'Physical Activity Level': '40'},.....
+] 
+```
+
+Time complexity: `O(N)` as goes over every instance
+<br/>
+Space complexity: `O(1)`, processed one at a time
