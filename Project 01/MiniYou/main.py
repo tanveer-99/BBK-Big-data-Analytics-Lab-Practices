@@ -26,5 +26,8 @@ for movie in fun.mini_load_csv_yield(input_data):
 # ------------------------------
 
 #calculate the proportion
-print(fun.mini_proportion_count(input_data, "Heart Rates", '70'))
+# print(fun.mini_proportion_count(input_data, "Heart Rates", '70'))
 
+#----------------------------------
+# count how many values match between two different column conditions
+# print(fun.mini_count_match(input_data, "Occupation", "Doctor", "BMI Category", "Normal"))

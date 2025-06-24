@@ -78,3 +78,19 @@ def mini_proportion_count(input_data, col, value):
         
     proportion_value = count/total
     return {"Exists": True, "Column": col, "Value": value, "Proportion": proportion_value}
+
+#--------------------------------------------
+
+# count how many values match between two different column conditions
+def mini_count_match(input_data, col_one, val_one, col_two, val_two):
+    count = 0
+    rows = mini_load_csv_dict(input_data)
+    if col_one not in rows[0].keys() or col_two not in rows[0].keys():
+        return {"Exists": False}
+    for row in rows:
+        if (row.get(col_one) == val_one) and (row.get(col_two) == val_two):
+            count += 1
+    if count == 0:
+        return "columns exist but no match between them"
+    return {"Conditions": {col_one: val_one, col_two: val_two}, "Count": count}
+    
