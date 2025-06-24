@@ -154,3 +154,21 @@ If none of the columns exist: `{"Exists": False}`
 
 Time Complexity: `O(N)` <br/>
 Space Complexity: `O(N)`
+
+## Task 05
+`mini_average()` function takes a numeric column and finds the average of the values, ignoring missing or non-numeric values. And return the average in float.
+
+> `return` method is used instead of `yield` as we need to traverse all the instances and return a single value as return.
+
+Usage:
+```python
+print(fun.mini_average(input_data, 'Daily Steps'))
+```
+
+Output:<br/>
+If exists: ` {'Exists': True, 'Column': 'Daily Steps', 'Average': 6816.84} `
+<br/>
+If not exists: ` {"Exists": False, "Column": `Daily Steps`} `
+
+Time Complexity: `O(N)` <br/>
+Space Complexity: `O(N)`

@@ -31,3 +31,9 @@ for movie in fun.mini_load_csv_yield(input_data):
 #----------------------------------
 # count how many values match between two different column conditions
 # print(fun.mini_count_match(input_data, "Occupation", "Doctor", "BMI Category", "Normal"))
+
+
+# --------------------------------
+# takes a numeric column and finds the average
+# print(fun.mini_average(input_data, 'Daily Steps'))
+

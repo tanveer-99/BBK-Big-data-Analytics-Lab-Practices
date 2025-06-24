@@ -94,3 +94,18 @@ def mini_count_match(input_data, col_one, val_one, col_two, val_two):
         return "columns exist but no match between them"
     return {"Conditions": {col_one: val_one, col_two: val_two}, "Count": count}
     
+# -------------------------------
+# takes a numeric column and finds the average
+def mini_average(input_data, col):
+    total = 0.0
+    count = 0
+    rows = mini_load_csv_dict(input_data)
+    if col not in rows[0].keys():
+        return {"Exists": False, "Column": col}
+    for row in rows:
+        try:
+            total += float(row.get(col))
+            count += 1
+        except (TypeError, ValueError):
+            continue
+    return {"Exists": True, "Column": col, "Average": round(total/count, 2)}
