@@ -1,6 +1,8 @@
 import fun
 
+# this is the input data read as a dictionary
 input_data = {"data": "datasets/Sleep_health_and_lifestyle_dataset.csv"}
+# the output is stores in this list as needed
 data = []
 
 # for row in fun.mini_load_csv_dict(input_data):
@@ -9,7 +11,15 @@ data = []
 
 for movie in fun.mini_load_csv_yield(input_data):
     data.append(movie)
+# print(data[0])
 
-print(data[0])
-print(fun.mini_len(input_data, 'Gender'))
+# -----------------------------
+
+# returns the number of inputs in the column and missing values also
+# print(fun.mini_len(input_data, 'Gender'))
+
+#------------------------------
+
+# searches for the specific value in a given column
+# print(fun.mini_search(input_data, "Occupation", 'Lawyer'))
 
