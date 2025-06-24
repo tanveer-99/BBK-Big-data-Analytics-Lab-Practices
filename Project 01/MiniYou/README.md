@@ -134,6 +134,7 @@ Space complexity: `O(N)`
 ## task 04
 `mini_count_match()` takes two column names and two values and find how many instances are common between them
 
+> Used `return` method for the same purpose as the previous
 
 Usage:
 ```python
