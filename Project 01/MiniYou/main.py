@@ -39,4 +39,8 @@ for movie in fun.mini_load_csv_yield(input_data):
 
 #---------------------------
 # extracts the Person ID , Quality of Sleep , and Physical Activity Level only for individuals whose occupation is Teacher
-print(list(fun.mini_extract_metrics(input_data, {"Col1":"Person ID", "Col2":"Quality of Sleep", "Col3":"Physical Activity Level"})))
+# print(list(fun.mini_extract_metrics(input_data, {"Col1":"Person ID", "Col2":"Quality of Sleep", "Col3":"Physical Activity Level"})))
+
+#-------------------------
+# this takes min or max and a column name to return the max or min value
+# print(fun.mini_states({"Data": input_data, "function": "max", "column": "Age"}))

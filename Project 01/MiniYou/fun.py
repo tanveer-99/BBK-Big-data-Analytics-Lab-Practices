@@ -120,3 +120,27 @@ def mini_extract_metrics(input_data, columns):
                 columns.get('Col2'): row.get(columns.get('Col2')),
                 columns.get('Col3'): row.get(columns.get('Col3'))
             }
+
+#-----------------------------------
+# this takes min or max and a column name to return the max or min value
+def mini_states(input_data):
+    rows = mini_load_csv_dict(input_data.get('Data'))
+    func = input_data.get('function').lower()
+    col = input_data.get('column')
+    if col not in rows[0]:
+        return {"Function": func, "Column": col, "Result": None}
+    result = None
+    for row in rows:
+        try: 
+            number = float(row.get(col))
+        except (TypeError, ValueError):
+            continue
+        if result == None:
+            result = number
+        else:
+            if func=='min' and number < result:
+                result = number
+            elif func=='max' and number > result:
+                result = number 
+    return {"Function": func, "Column": col, "Result": result}      
+    

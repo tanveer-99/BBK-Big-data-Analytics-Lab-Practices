@@ -195,3 +195,25 @@ Example Output: <br/>
 Time complexity: `O(N)` as goes over every instance
 <br/>
 Space complexity: `O(1)`, processed one at a time
+
+## Task 07
+`mini_stats()` takes a column name and a function name(min or max), then finds the min or max of that column. Ignoring missing or non-integer values.
+
+> `Return` method used, as it needs to travese all the points and find a final answer
+
+
+Usage:
+```python
+print(fun.mini_states({"Data": input_data, "function": "max", "column": "Age"}))
+```
+
+
+Output:<br/>
+If exists: `{'Function': 'max', 'Column': 'Age', 'Result': 59.0}`
+<br/>
+If not exist: `{"Function": 'max', "Column": 'Age', "Result": None}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
