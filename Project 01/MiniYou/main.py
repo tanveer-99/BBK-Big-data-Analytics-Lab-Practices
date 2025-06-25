@@ -53,3 +53,8 @@ for movie in fun.mini_load_csv_yield(input_data):
 #------------------------------
 # finds a specific value in the sorted list
 # print(fun.mini_value_list_exists({"Data": input_data, "column": "Age", "value": 29.0}))
+
+
+#--------------------------------
+# counts how many items per category in a specific given column
+# print(fun.mini_frequency_table({"Data": input_data, "column": "Gender"}))

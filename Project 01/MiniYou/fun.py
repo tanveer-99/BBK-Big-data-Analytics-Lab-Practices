@@ -176,4 +176,23 @@ def mini_value_list_exists(input_data):
         return {"Value":input_data.get('value'), "Exists": True}
     else:
         return {"Value":input_data.get('value'), "Exists": False}
+    
 
+#--------------------------------
+# counts how many items per category in a specific given column
+def mini_frequency_table(input_data):
+    rows = mini_load_csv_dict(input_data.get("Data"))
+    col = input_data.get("column")
+    if col not in rows[0]:
+        return {"Column": col, "Exists": False}
+    result = {}
+    for row in rows:
+        value = row.get(col)
+        if not value or not value.strip():
+            continue
+        value = value.strip().lower()
+        if value in result:
+            result[value] += 1
+        else:
+            result[value] = 1
+    return {col:result}

@@ -258,3 +258,24 @@ If not exists: `{'Value': 7.0, 'Exists': False}`
 Time complexity: `O(N)`
 <br/>
 Space complexity: `O(N)`
+
+
+## Task 10
+`mini_frequency_table()` counts the values in a specific column
+
+> `return` is used instead of `yield` as we need to go output one final, fully sorted list of values
+
+Usage:
+```python
+print(fun.mini_frequency_table({"Data": input_data, "column": "Gender"}))
+```
+
+Output:<br/>
+If exists: `{'Gender': {'male': 188, 'female': 185}}`
+<br/>
+If not exists: `{"Column": col, "Exists": False}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
