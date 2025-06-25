@@ -166,3 +166,14 @@ def mini_bubble_sort(input_data):
     sorted = [float(row[col]) for row in rows]
     return {"column": col, "sorted data": sorted}
 
+
+#-----------------------------
+# finds a specific value in the sorted list
+def mini_value_list_exists(input_data):
+    sorted_data = mini_bubble_sort({"Data": input_data.get("Data"), "column": "Age"})
+    sorted_values = sorted_data.get("sorted data")
+    if input_data.get('value') in sorted_values:
+        return {"Value":input_data.get('value'), "Exists": True}
+    else:
+        return {"Value":input_data.get('value'), "Exists": False}
+

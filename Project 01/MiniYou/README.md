@@ -238,3 +238,23 @@ If not exists: `return {"Exists": "False"}`
 Time complexity: `O(N)`
 <br/>
 Space complexity: `O(N)`
+
+## Task 09
+`mini_value_list_exists()` finds a specific value in the sorted list
+
+> `return` is used as in the previous bubble sort function
+
+Usage:
+```python
+print(fun.mini_value_list_exists({"Data": input_data, "column": "Age", "value": 29.0}))
+```
+
+Output:<br/>
+If exists: `{'Value': 29.0, 'Exists': True}`
+<br/>
+If not exists: `{'Value': 7.0, 'Exists': False}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`

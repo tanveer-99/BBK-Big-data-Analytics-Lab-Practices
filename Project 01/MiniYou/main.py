@@ -49,3 +49,7 @@ for movie in fun.mini_load_csv_yield(input_data):
 #-----------------------
 # bubble sort in ascending order
 # print(fun.mini_bubble_sort({"Data": input_data, "column": "Age"}))
+
+#------------------------------
+# finds a specific value in the sorted list
+# print(fun.mini_value_list_exists({"Data": input_data, "column": "Age", "value": 29.0}))
