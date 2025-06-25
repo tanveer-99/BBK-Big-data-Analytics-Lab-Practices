@@ -196,3 +196,31 @@ def mini_frequency_table(input_data):
         else:
             result[value] = 1
     return {col:result}
+
+
+#------------------------------
+# Check if the Daily_Steps column exists and how many missing values it contains
+def mini_check_missing_values(input_data):
+    result = mini_len(input_data.get("Data"), input_data.get('column'))
+    return {"Column": result['Column'], "Missing Values": result['Number of missing records']}
+
+#-------------------------------
+# Count how many individuals report Daily_Steps of 6457 hours.
+def mini_report_daily_steps(input_data):
+    total = mini_len(input_data, "Daily Steps").get('Number of records')
+    proportion = mini_proportion_count(input_data, "Daily Steps", "7000").get('Proportion')
+    return {"Column": "Daily Steps", "Individuals Report": proportion*total}
+
+
+#-----------------------------------
+# Calculate the average BMI across all individuals
+def mini_calculate_average_BMI(input_data):
+    return mini_average(input_data, "BMI")
+
+#---------------------------------
+# how many female users sleep 7.4 hours
+def mini_count_specific_sleep_based_on_gender(input_data):
+    return mini_count_match(input_data.get("Data"), input_data.get('col_one'), input_data.get('val_one'), input_data.get('col_two'), input_data.get('val_two')).get("Count")
+
+
+    

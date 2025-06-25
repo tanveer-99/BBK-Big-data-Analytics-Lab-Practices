@@ -2,6 +2,7 @@ import fun
 
 # this is the input data read as a dictionary
 input_data = {"data": "datasets/Sleep_health_and_lifestyle_dataset.csv"}
+input_data_2 = {"data": "datasets/health_activity_data.csv"}
 # the output is stores in this list as needed
 data = []
 
@@ -58,3 +59,23 @@ for movie in fun.mini_load_csv_yield(input_data):
 #--------------------------------
 # counts how many items per category in a specific given column
 # print(fun.mini_frequency_table({"Data": input_data, "column": "Gender"}))
+
+
+#------------------------------
+# Check if the Daily_Steps column exists and how many missing values it contains
+# print(fun.mini_check_missing_values({"Data": input_data, "column": 'Daily Steps'}))
+
+
+#-------------------------------
+# Count how many individuals report Daily_Steps of 6457 hours.
+# print(fun.mini_report_daily_steps(input_data))
+
+
+#-----------------------------------
+# Calculate the average BMI across all individuals
+# print(fun.mini_calculate_average_BMI(input_data_2))
+
+
+#---------------------------------
+# how many female users sleep 7.4 hours
+# print(fun.mini_count_specific_sleep_based_on_gender({"Data": input_data, "col_one": "Gender", "val_one": "Female", "col_two": "Sleep Duration", "val_two": "7.4"}))

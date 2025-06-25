@@ -279,3 +279,109 @@ If not exists: `{"Column": col, "Exists": False}`
 Time complexity: `O(N)`
 <br/>
 Space complexity: `O(N)`
+
+
+# Part C
+## Task 01
+`mini_check_missing_values()` takes one column and counts how many missing values are there
+
+> `return` method is used
+
+Usage:
+```python
+print(fun.mini_check_missing_values({"Data": input_data, "column": 'Daily Steps'}))
+```
+
+Output:<br/>
+If column exists: `{'Column': 'Daily Steps', 'Missing Values': 0}`
+<br/>
+If column not exist: `{'Exists': False}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
+
+
+## Task 02
+`mini_report_daily_steps()` finds the individuals report Daily_Steps of 6457 hours.
+
+Usage:
+```python
+def mini_report_daily_steps(input_data):
+    total = mini_len(input_data, "Daily Steps").get('Number of records')
+    proportion = mini_proportion_count(input_data, "Daily Steps", "7000").get('Proportion')
+    return {"Column": "Daily Steps", "Individuals Report": proportion*total}
+```
+<br/>
+```python
+print(fun.mini_report_daily_steps(input_data))
+```
+
+
+Output: <br/>
+`{'Column': 'Daily Steps', 'Individuals Report': 66.0}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
+
+
+## Task 03
+`mini_calculate_average_BMI()` takes the BMI column from the health activity data and finds the average BMI
+
+
+> 'return` method is used as in the mini_average() function
+
+
+Usage: 
+```python
+def mini_calculate_average_BMI(input_data):
+    return mini_average(input_data, "BMI")
+```
+<br/>
+```python
+print(fun.mini_calculate_average_BMI(input_data_2))
+```
+
+
+Output:
+<br/>
+if exists: `{'Exists': True, 'Column': 'BMI', 'Average': 26.73}`
+<br/>
+If not exists: `{Exists': False}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
+
+
+## Task 04
+`mini_count_specific_sleep_based_on_gender()` finds how many female users sleep for 7.4 hours
+
+> `return` as in the function used
+
+
+Usage:
+```python
+def mini_count_specific_sleep_based_on_gender(input_data):
+    return mini_count_match(input_data.get("Data"), 
+                            input_data.get('col_one'), 
+                            input_data.get('val_one'), 
+                            input_data.get('col_two'), 
+                            input_data.get('val_two'))
+                            .get("Count")
+```
+```python
+print(fun.mini_count_specific_sleep_based_on_gender({"Data": input_data, "col_one": "Gender", "val_one": "Female", "col_two": "Sleep Duration", "val_two": "7.4"}))
+```
+
+
+Output: `1`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
