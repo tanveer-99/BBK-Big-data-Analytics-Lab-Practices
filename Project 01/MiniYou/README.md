@@ -218,4 +218,23 @@ Time complexity: `O(N)`
 <br/>
 Space complexity: `O(N)`
 
+## Task 08
+`mini_bubble_sort()` takes a numeric column and bubble sorts it in ascending order
 
+> `return` is used as we need to go through all the data points and gives a sorted list
+
+Usage:
+```python
+print(fun.mini_bubble_sort({"Data": input_data, "column": "Age"}))
+```
+
+Output:
+<br/>
+If exists: `{'column': 'Age', 'sorted data': [27.0, 28.0, 28.0, 28.0, 28.0, 28.0, 29.0, 29.0,.......]}`
+<br/>
+If not exists: `return {"Exists": "False"}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`

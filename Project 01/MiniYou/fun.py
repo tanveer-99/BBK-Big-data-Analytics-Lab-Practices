@@ -150,8 +150,8 @@ def mini_states(input_data):
 def mini_bubble_sort(input_data):
     rows = mini_load_csv_dict(input_data.get('Data'))
     col = input_data.get('column')
-    # if col not in rows[0]:
-    #     return {"Exists": "False"}
+    if col not in rows[0]:
+        return {"Exists": "False"}
     k = 0
     while k < len(rows):
         try:
@@ -163,5 +163,6 @@ def mini_bubble_sort(input_data):
         for j in range(i+1, len(rows)-i-1):
             if float(rows[i][col]) > float(rows[j][col]):
                 rows[i], rows[j] = rows[j], rows[i]
-    return {"column": col, "sorted data": rows}
+    sorted = [float(row[col]) for row in rows]
+    return {"column": col, "sorted data": sorted}
 
