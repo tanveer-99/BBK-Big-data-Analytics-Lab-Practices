@@ -13,7 +13,7 @@ def mini_load_csv_dict(input_dict):
             for row in reader:
                 data_rows.append(row)            
     except FileNotFoundError:
-        print(f"Error: File '{filename}' not found.")
+        print(f"Error: File '{filename}' not found. ")
         return []
     return data_rows
 
@@ -144,3 +144,24 @@ def mini_states(input_data):
                 result = number 
     return {"Function": func, "Column": col, "Result": result}      
     
+
+#----------------------------------
+# bubble sort in ascending order
+def mini_bubble_sort(input_data):
+    rows = mini_load_csv_dict(input_data.get('Data'))
+    col = input_data.get('column')
+    # if col not in rows[0]:
+    #     return {"Exists": "False"}
+    k = 0
+    while k < len(rows):
+        try:
+            float(rows[k][col])
+            k += 1
+        except(TypeError, ValueError):
+            rows.pop(k)
+    for i in range(len(rows)):
+        for j in range(i+1, len(rows)-i-1):
+            if float(rows[i][col]) > float(rows[j][col]):
+                rows[i], rows[j] = rows[j], rows[i]
+    return {"column": col, "sorted data": rows}
+

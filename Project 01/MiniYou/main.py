@@ -11,7 +11,7 @@ data = []
 
 for movie in fun.mini_load_csv_yield(input_data):
     data.append(movie)
-# print(data[0])
+# print(data)
 
 # -----------------------------
 
@@ -44,3 +44,8 @@ for movie in fun.mini_load_csv_yield(input_data):
 #-------------------------
 # this takes min or max and a column name to return the max or min value
 # print(fun.mini_states({"Data": input_data, "function": "max", "column": "Age"}))
+
+
+#-----------------------
+# bubble sort in ascending order
+print(fun.mini_bubble_sort({"Data": input_data, "column": "Age"}))
