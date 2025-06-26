@@ -3,6 +3,10 @@ import csv
 import requests
 import time
 
+#-------------------------
+# Part A Begins
+#-------------------------
+
 # this function loads the csv file as dictionary and stores the rows in a list with conventional return statement
 def mini_load_csv_dict(input_dict):
     filename = input_dict.get('data')
@@ -37,7 +41,11 @@ def mini_load_csv_yield(input_dict):
         print(f"Error: File '{filename}' not found.")
         return 
     
-#-------------------------------------------
+
+#-------------------------
+# Part B Begins
+#-------------------------
+
 
 #  finds the number of records present and missing in a given column
 def mini_len(input_data, col):
@@ -200,7 +208,12 @@ def mini_frequency_table(input_data):
     return {col:result}
 
 
-#------------------------------
+
+#-------------------------
+# Part C Begins
+#-------------------------
+
+
 # Check if the Daily_Steps column exists and how many missing values it contains
 def mini_check_missing_values(input_data):
     result = mini_len(input_data.get("Data"), input_data.get('column'))
@@ -225,8 +238,10 @@ def mini_count_specific_sleep_based_on_gender(input_data):
     return mini_count_match(input_data.get("Data"), input_data.get('col_one'), input_data.get('val_one'), input_data.get('col_two'), input_data.get('val_two')).get("Count")
 
 
-    
-#-------------------------------
+#-------------------------
+# Part D Begins
+#-------------------------    
+
 # fetching the weather data
 def mini_weather_data(locations):
     url = "https://api.open-meteo.com/v1/forecast"
