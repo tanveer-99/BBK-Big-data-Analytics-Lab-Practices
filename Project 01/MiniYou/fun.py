@@ -1,5 +1,7 @@
 # All the functions must be written in this file
 import csv
+import requests
+import time
 
 # this function loads the csv file as dictionary and stores the rows in a list with conventional return statement
 def mini_load_csv_dict(input_dict):
@@ -224,3 +226,104 @@ def mini_count_specific_sleep_based_on_gender(input_data):
 
 
     
+#-------------------------------
+# fetching the weather data
+def mini_weather_data(locations):
+    url = "https://api.open-meteo.com/v1/forecast"
+    results = []
+    for loc in locations:
+        params = {
+            "latitude": loc["lat"],
+            "longitude": loc["lon"],
+            "hourly": "temperature_2m"
+        }
+        response = requests.get(url, params=params)
+        data = response.json()
+        hourly = data.get("hourly", {})
+        temperatures = hourly.get("temperature_2m", [])
+        results.append({
+            "city": loc["city"],
+            "temperatures": temperatures
+        })
+        time.sleep(1)
+    return results
+
+# find the hottest city
+def mini_hottest_city(locations):
+    data = mini_weather_data(locations[:10])
+    hottest_city = None
+    hottest_temperature = None
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        city_max = temperatures[0]
+        for temp in temperatures:
+            if temp > city_max:
+                city_max = temp
+        if (hottest_temperature is None) or (city_max > hottest_temperature):
+            hottest_temperature = city_max
+            hottest_city = city
+    return {"city":hottest_city, "Hottest Temperature": hottest_temperature}
+
+# Find the coldest city today
+def mini_coldest_city(locations):
+    data = mini_weather_data(locations[:10])
+    coldest_city = None
+    coldest_temperature = None
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        city_min = temperatures[0]
+        for temp in temperatures:
+            if temp < city_min:
+                city_min = temp
+        if (coldest_temperature is None) or (city_min > coldest_temperature):
+            coldest_temperature = city_min
+            coldest_city = city
+    return {"city":coldest_city, "coldest Temperature": coldest_temperature}
+
+# list cities where the temperature is between 20 and 30 degree 
+def mini_cities_between_range(locations):
+    data = mini_weather_data(locations[:10])
+    cities_within_range = []
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        for temp in temperatures:
+            if temp >= 20 and temp <= 30:
+                if city not in cities_within_range:
+                    cities_within_range.append(city)
+    return cities_within_range
+
+# Show top 5 cities with the highest temperature difference (max - min)
+def mini_highest_temp_diff(locations):
+    data = mini_weather_data(locations[:10])
+    difference = {}
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        low = temperatures[0]
+        high = temperatures[0]
+        for temp in temperatures:
+            if temp < low:
+                low = temp
+            elif temp > high:
+                high = temp
+        diff = high - low
+        difference[city] = diff
+    
+    items = []
+    for city in difference:
+        items.append((city, difference[city]))
+    n = len(items)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if items[j][1] < items[j+1][1]:
+                items[j], items[j+1] = items[j+1], items[j]
+    result = {}
+    for city, difference in items:
+        result[city] = difference
+    return result
+        
+
+

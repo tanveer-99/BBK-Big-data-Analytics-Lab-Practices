@@ -385,3 +385,176 @@ Output: `1`
 Time complexity: `O(N)`
 <br/>
 Space complexity: `O(N)`
+
+
+# Part D
+## Task 01
+`mini_weather_data()` function takes the list of cities locations and extracts the data. The data is the hourly temperature of a given city. A 1-second delay is included between requests to avoid being rate-limited or blocked.
+
+```python
+def mini_weather_data(locations):
+    url = "https://api.open-meteo.com/v1/forecast"
+    results = []
+    for loc in locations:
+        params = {
+            "latitude": loc["lat"],
+            "longitude": loc["lon"],
+            "hourly": "temperature_2m"
+        }
+        response = requests.get(url, params=params)
+        data = response.json()
+        hourly = data.get("hourly", {})
+        temperatures = hourly.get("temperature_2m", [])
+        results.append({
+            "city": loc["city"],
+            "temperatures": temperatures
+        })
+        time.sleep(1)
+    return results
+```
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
+
+## Task 02
+`mini_hottest_city()` function takes the locations list and retrieves the data with the help of `mini_weather_data()` function to calculate the hottest temperature 
+
+```python
+def mini_hottest_city(locations):
+    data = mini_weather_data(locations[:10])
+    hottest_city = None
+    hottest_temperature = None
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        city_max = temperatures[0]
+        for temp in temperatures[1:]:
+            if temp > city_max:
+                city_max = temp
+        if (hottest_temperature is None) or (city_max > hottest_temperature):
+            hottest_temperature = city_max
+            hottest_city = city
+    return {"city":hottest_city, "Hottest Temperature": hottest_temperature}
+```
+
+
+Usage:
+```python
+print(fun.mini_hottest_city(locations))
+```
+
+
+Output:<br/>
+`{'city': 'Paris', 'Hottest Temperature': 39.4}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
+
+
+## Task 03
+`mini_coldest_city()` function takes the locations list and retrieves the data with the help of `mini_weather_data()` function to calculate the coldest temperature 
+
+```python
+def mini_coldest_city(locations):
+    data = mini_weather_data(locations[:10])
+    coldest_city = None
+    coldest_temperature = None
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        city_min = temperatures[0]
+        for temp in temperatures[1:]:
+            if temp < city_min:
+                city_min = temp
+        if (coldest_temperature is None) or (city_min > coldest_temperature):
+            coldest_temperature = city_min
+            coldest_city = city
+    return {"city":coldest_city, "coldest Temperature": coldest_temperature}
+```
+
+
+Usage:
+```python
+print(fun.mini_coldest_city(locations))
+```
+
+
+Output:<br/>
+`{'city': 'Mumbai', 'coldest Temperature': 27.6}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
+
+
+## Task 04
+`mini_cities_between_range()` function takes the list of cities as input and finds the cities whose temperatures are between 20 degree and 30 degree celcius.
+
+```python
+def mini_cities_between_range(locations):
+    data = mini_weather_data(locations[:10])
+    cities_within_range = []
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        for temp in temperatures:
+            if city not in cities_within_range:
+                cities_within_range.append(city)
+    return cities_within_range
+```
+
+Usage: `print(fun.mini_cities_between_range(locations))`
+
+
+Output: `['New York', 'London', 'Paris', 'Tokyo',.....]`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
+
+## Task 05
+`mini_highest_temp_diff()` function takes the list of locations and gets the cities that have the highest temperature differences (max-min)
+
+```python
+def mini_highest_temp_diff(locations):
+    data = mini_weather_data(locations[:10])
+    difference = {}
+    for item in data:
+        city = item.get('city')
+        temperatures = item.get("temperatures")
+        low = temperatures[0]
+        high = temperatures[0]
+        for temp in temperatures:
+            if temp < low:
+                low = temp
+            elif temp > high:
+                high = temp
+        diff = high - low
+        difference[city] = diff
+    
+    items = []
+    for city in difference:
+        items.append((city, difference[city]))
+    n = len(items)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if items[j][1] < items[j+1][1]:
+                items[j], items[j+1] = items[j+1], items[j]
+    result = {}
+    for city, difference in items:
+        result[city] = difference
+    return result
+```
+
+
+Output: `{'Paris': 19.5, 'London': 16.9, 'Rio de Janeiro': 15.7, 'New York': 13.3, 'Sydney': 12.7}`
+
+
+Time complexity: `O(N)`
+<br/>
+Space complexity: `O(N)`
