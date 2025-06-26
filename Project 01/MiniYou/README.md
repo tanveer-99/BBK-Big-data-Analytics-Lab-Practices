@@ -14,16 +14,17 @@ MiniYou
 ## Datasets
 The two datasets are discussed below:
 ### health_activity_data.csv
-//comment on the dataset
+The Sleep Health and Lifestyle dataset is structured with 13 columns that describe various personal health and lifestyle attributes. The columns include Person ID, Gender, Age, Occupation, Sleep Duration, Quality of Sleep, Physical Activity Level, Stress Level, BMI Category, Blood Pressure, Heart Rate, Daily Steps, and Sleep Disorder.
 ### Sleep_health_and_lifestyle_dataset.csv
-//comment on the dataset
+The Health Activity Data file contains 16 columns providing a detailed structure of an individual's health and daily activities. These columns are ID, Age, Gender, Height_cm, Weight_kg, BMI, Daily_Steps, Calories_Intake, Hours_of_Sleep, Heart_Rate, Blood_Pressure, Exercise_Hours_per_Week, Smoker, Alcohol_Consumption_per_Week, Diabetic, and Heart_Disease status.
 
 ## Functions
 ### mini_load_csv_dict()
 
 The function takes the csv dataset as a dictionary and loads it with the ` csv.DictReader() `. This function uses the return method to return all the rows in a single list. 
 
-```python def mini_load_csv_dict(input_dict):
+```python 
+def mini_load_csv_dict(input_dict):
     filename = input_dict.get('data')
     if not filename:
         raise ValueError("No 'data' key provided in the input dictionary.")
