@@ -183,7 +183,7 @@ columns = [
     "id", "title", "uploader", "artist", "tags", "duration_seconds", "upload_date", "view_count", "like_count", "year_uploaded", "tag_count"
 ]
 
-
+```python
 for file in json_files:
     with open(file, "r", encoding="utf-8") as f:
         data = json.load(f)
