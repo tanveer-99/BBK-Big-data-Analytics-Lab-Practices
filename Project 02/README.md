@@ -106,3 +106,35 @@ The time for parallel runner is O(n/p), p being the number of processes/threads 
 
 > However, the severe waiting due to I/O or, network speed limitation, the performance will depend on. In our case, the network speed might be low or because of the low configuration machine, there is not a significant change shown, although less than serial.
 
+## Step 4: Create a safe logger
+The `log_download_status` function creates a log for each of the download and writes it down in the `download_log.txt` file. 
+```python
+def log_download_status(url: str, success: bool=True, error_msg: str = ''):
+    timestamp = datetime.now().isoformat(timespec='seconds')
+    log_entry = {
+        "timestamp": timestamp,
+        "url": url,
+        "download": success,
+        "error_msg": error_msg if not success else None
+    }
+    
+    # save log info to the download_log.txt file
+    log_file_path = os.path.join(LOGS_DIR, 'download_log.txt')
+    with open(log_file_path, "a", encoding="utf-8") as log_file:
+        json.dump(log_entry, log_file)
+        log_file.write("\n")
+```
+The download_log.txt looks like this:
+```python
+{"timestamp": "2025-07-17T19:28:17", "url": "https://www.youtube.com/watch?v=HhiBpR20RHE&list=RDHhiBpR20RHE&start_radio=1", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:28:23", "url": "https://www.youtube.com/watch?v=RCCz1WdU-D0&list=RDHhiBpR20RHE&index=3", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:28:28", "url": "https://www.youtube.com/watch?v=dJibiqUMxXk&list=RDdJibiqUMxXk&start_radio=1", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:28:34", "url": "https://www.youtube.com/watch?v=zjplA5XnacE&list=RDzjplA5XnacE&start_radio=1", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:28:39", "url": "https://www.youtube.com/watch?v=gJLVTKhTnog&list=RDMMgJLVTKhTnog&start_radio=1", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:28:45", "url": "https://www.youtube.com/watch?v=AGsn2ycFRqI&list=RDAGsn2ycFRqI&start_radio=1", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:28:51", "url": "https://www.youtube.com/watch?v=Ib_L3vuUX5k&list=RDMM&start_radio=1&rv=AGsn2ycFRqI", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:28:56", "url": "https://www.youtube.com/watch?v=JgDNFQ2RaLQ&list=RDJgDNFQ2RaLQ&start_radio=1", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:29:01", "url": "https://www.youtube.com/watch?v=BefnUx8wHxo", "download": true, "error_msg": null}
+{"timestamp": "2025-07-17T19:29:06", "url": "https://www.youtube.com/shorts/tnCvXqplP4w", "download": true, "error_msg": null}
+```
+
