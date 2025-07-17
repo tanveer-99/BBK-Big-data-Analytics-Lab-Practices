@@ -92,11 +92,24 @@ def save_metadata_to_file(metadata: dict, title: str) -> str:
 def download_youtube_audio_with_metadata(url: str):
     """Main function to download audio and save metadata."""
     print(f"\n🎵 Downloading: {url}")
-    try:
-        log_download_status(url)
-        info = get_video_info(url)
-        metadata = extract_metadata(info)
-        json_path = save_metadata_to_file(metadata, metadata["title"])
-        print(f"✅ Done: {metadata['title']}\n📄 Metadata: {json_path}")
-    except Exception as e:
-        print(f"❌ Failed to download: {url}\n   Error: {e}")
+    retries = 2
+    attempt = 0
+    while attempt<=retries:
+        try:
+            log_download_status(url)
+            info = get_video_info(url)
+            metadata = extract_metadata(info)
+            json_path = save_metadata_to_file(metadata, metadata["title"])
+            print(f"✅ Done: {metadata['title']}\n📄 Metadata: {json_path}")
+        except Exception as e:
+            attemp += 1
+            print(f"❌ Failed to download: {url}\n   Error: {e}")
+            log_download_status(url, success=False, error_msg=str(e))
+            if attempt < retries:
+                print(f"retrying for attemp number: {attempt+1}")
+            if attempt == retries:
+                print(f"Retry attempt failed for {url}.")
+                break
+
+
+        
