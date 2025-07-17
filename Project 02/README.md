@@ -168,6 +168,7 @@ def download_youtube_audio_with_metadata(url: str):
 The `data_extractor.py` script takes the json files stores in the audio_output folder and then converts them into a pandas dataframe. Only the below listed information are selected for the csv columns.
 > "id", "title", "uploader", "artist", "tags", "duration_seconds", "upload_date", "view_count", "like_count", "year_uploaded", "tag_count"
 <br/>
+
 ```python
 import pandas as pd
 import glob
@@ -183,7 +184,6 @@ columns = [
     "id", "title", "uploader", "artist", "tags", "duration_seconds", "upload_date", "view_count", "like_count", "year_uploaded", "tag_count"
 ]
 
-```python
 for file in json_files:
     with open(file, "r", encoding="utf-8") as f:
         data = json.load(f)
