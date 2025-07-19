@@ -205,31 +205,27 @@ The combined_metadata.csv file is then stored in the data folder.
 # Part 03: Data Analysis
 ## Descriptive Statistics
 
-1. What is the average duration (in seconds) of all videos in the dataset? 
-Pandas: `df_pandas['duration_seconds'].mean()` <br/>
-Spark: `df_spark.select(avg("duration_seconds")).collect()[0][0]`
+- What is the average duration (in seconds) of all videos in the dataset? 
+    - Pandas: `df_pandas['duration_seconds'].mean()` <br/>
+    - Spark: `df_spark.select(avg("duration_seconds")).collect()[0][0]`
 <br/>
 
-2. Which uploader appears most frequently in the dataset? 
-<br/>
-Pandas: `df_pandas['uploader'].value_counts().idxmax()` <br/>
-Spark: `df_spark.groupBy("uploader").count().orderBy("count", ascending=False).first()`
+- Which uploader appears most frequently in the dataset? 
+    - Pandas: `df_pandas['uploader'].value_counts().idxmax()` <br/>
+    - Spark: `df_spark.groupBy("uploader").count().orderBy("count", ascending=False).first()`
 <br/>
 
-3. Which five videos have the highest number of views? List their titles and view counts.
-<br/>
-Pandas: `df_pandas[['title', 'view_count']].nlargest(5, 'view_count')` <br/>
-Spark: `df_spark.orderBy("view_count", ascending=False).limit(5).show()`
+- Which five videos have the highest number of views? List their titles and view counts.
+    - Pandas: `df_pandas[['title', 'view_count']].nlargest(5, 'view_count')` <br/>
+    - Spark: `df_spark.orderBy("view_count", ascending=False).limit(5).show()`
 <br/>
 
 4. For each upload year, what is the average number of likes?
-<br/>
-Pandas: `df_pandas.groupby('year_uploaded')['like_count'].mean()` <br/>
-Spark: `df_spark.groupBy("year_uploaded").agg(avg("like_count").alias("avg_likes")).show()`
+    - Pandas: `df_pandas.groupby('year_uploaded')['like_count'].mean()` <br/>
+    - Spark: `df_spark.groupBy("year_uploaded").agg(avg("like_count").alias("avg_likes")).show()`
 <br/>
 
 5. How many videos are missing artist information?
-<br/>
-Pandas: `df_pandas['artist'].isnull().sum()` <br/>
-Spark: `df_spark.filter(col("artist").isNull()).count()`
+    - Pandas: `df_pandas['artist'].isnull().sum()` <br/>
+    - Spark: `df_spark.filter(col("artist").isNull()).count()`
 <br/>
