@@ -202,5 +202,9 @@ df.to_csv("data/combined_metadata.csv", index=False)
 
 The combined_metadata.csv file is then stored in the data folder.
 
+# Part 03: Data Analysis
+## Descriptive Statistics
+1. What is the average duration (in seconds) of all videos in the dataset?
 
-
+Pandas: `df_pandas['duration_seconds'].mean()` <br/>
+Spark: `df_spark.select(avg("duration_seconds")).collect()[0][0]`
