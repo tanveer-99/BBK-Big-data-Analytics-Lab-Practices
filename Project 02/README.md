@@ -220,12 +220,78 @@ The combined_metadata.csv file is then stored in the data folder.
     - Spark: `df_spark.orderBy("view_count", ascending=False).limit(5).show()`
 <br/>
 
-4. For each upload year, what is the average number of likes?
+- For each upload year, what is the average number of likes?
     - Pandas: `df_pandas.groupby('year_uploaded')['like_count'].mean()` <br/>
     - Spark: `df_spark.groupBy("year_uploaded").agg(avg("like_count").alias("avg_likes")).show()`
 <br/>
 
-5. How many videos are missing artist information?
+- How many videos are missing artist information?
     - Pandas: `df_pandas['artist'].isnull().sum()` <br/>
     - Spark: `df_spark.filter(col("artist").isNull()).count()`
 <br/>
+
+## Tag and Content Characteristics
+
+- How many tags does each video have? Visualize the distribution using a histogram.
+```python
+df_pandas['tags'] = df_pandas['tags'].apply(lambda x: eval(x) if isinstance(x, str) else [])
+df_pandas['num_tags'] = df_pandas['tags'].apply(len)
+plt.xticks(rotation=90)
+sns.barplot(x=df_pandas['title'], y=df_pandas['num_tags'], palette='Blues_d')
+```
+![](histogram.png)
+
+- What is the total number of views per uploader? Rank the results in descending order.
+    - query: `df_pandas.groupby('uploader')['view_count'].sum().sort_values(ascending=False)`
+
+<br/>
+Output:
+
+| Rank | Uploader              | Total Views   |
+|:-----|:----------------------|:--------------|
+| 1    | Anuv Jain             | 217,905,789   |
+| 2    | Ed Sheeran            | 119,657,558   |
+| 3    | SonyMusicIndiaVEVO    | 78,932,767    |
+| 4    | SVF Music             | 7,469,860     |
+| 5    | Ishaan                | 6,130,480     |
+| 6    | Indalo                | 2,426,631     |
+| 7    | Owned The Band        | 537,761       |
+| 8    | Firoze Jong           | 476,034       |
+| 9    | Deluwar Hussen Tanvir | 313           |
+<br/>
+
+- Which video has the longest duration? List the title and its duration.
+    - query: `df_pandas.loc[df_pandas['duration_seconds'].idxmax()][['title', 'duration_seconds']]`
+
+output:
+| Attribute              | Value                                                 |
+|:-----------------------|:------------------------------------------------------|
+| **Title** | A.R. Rahman - Tum Tak (Lyric Video) \| Raanjhan...    |
+| **Duration (seconds)** | 304                                                   |
+<br/>
+
+- How many videos were uploaded in each year? Present the results sorted by year.
+    - query: `df_pandas['year_uploaded'].value_counts().sort_values(ascending=True)`
+
+Output:
+| Year Uploaded | Number of Videos |
+|:--------------|:-----------------|
+| 2013          | 1                |
+| 2021          | 2                |
+| 2022          | 1                |
+| 2023          | 3                |
+| 2024          | 1                |
+| 2025          | 2                |
+
+<br/>
+- Is there a correlation between the number of views and the number of likes?
+```python
+df_pandas = df_pandas.dropna()
+df_pandas = df_pandas[df_pandas['view_count'] > 0]
+df_pandas = df_pandas[df_pandas['like_count'] > 0]
+correlation = df_pandas['view_count'].corr(df_pandas['like_count'])
+print(correlation)
+```
+
+output: nan
+
