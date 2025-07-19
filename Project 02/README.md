@@ -296,3 +296,57 @@ print(correlation)
 
 output: nan
 
+## Derived Metrics & Custom Analysis
+- Which video has the highest number of likes per second of duration?
+```python
+df_pandas['likes_per_second'] = df_pandas['like_count'] / df_pandas['duration_seconds']
+video_with_highest_likes_per_second = df_pandas.loc[df_pandas['likes_per_second'].idxmax()]
+print(video_with_highest_likes_per_second)
+```
+
+output:
+| Attribute          | Value                                               |
+|:-------------------|:----------------------------------------------------|
+| **id** | JgDNFQ2RaLQ                                         |
+| **title** | Ed Sheeran - Sapphire (Official Music Video)        |
+| **uploader** | Ed Sheeran                                          |
+| **artist** | NaN                                                 |
+| **tags** | [edsheeran, ed sheeran, acoustic, live, cover,...    |
+| **duration_seconds** | 183                                                 |
+| **upload_date** | 20250605                                            |
+| **view_count** | 119657558                                           |
+| **like_count** | 3425276                                             |
+| **year_uploaded** | 2025                                                |
+| **tag_count** | 22                                                  |
+| **num_tags** | 22                                                  |
+| **likes_per_second**| 18717.355191                                        |
+
+- Which uploader has the longest total duration of all their uploaded videos combined?
+```python
+uploader_total_duration = df_pandas.groupby('uploader')['duration_seconds'].sum()
+longest_uploader = uploader_total_duration.idxmax()
+print(longest_uploader)
+```
+
+output: SonyMusicIndiaVEVO
+
+- What is the ratio of views to likes for each video?
+```python
+df_pandas['view_like_ratio'] = df_pandas['view_count'] / df_pandas['like_count']
+print(df_pandas[['title', 'view_like_ratio']])
+```
+
+output:
+| | Title | View-Like Ratio |
+|:--|:---|:---|
+| 0 | Aalote Chol - Lyrical (আলোতে চল) \| Srikanto \| ... | 127.047078 |
+| 1 | Anuv Jain - HUSN (Official Video) | 98.236828 |
+| 2 | A.R. Rahman - Tum Tak (Lyric Video) \| Raanjhan... | 152.120843 |
+| 3 | Beatles \| Firoze Jong | 54.628644 |
+| 4 | Ed Sheeran - Sapphire (Official Music Video) | 34.933698 |
+| 5 | Gulbahar \| গুলবাহার \| Ishaan এর Gaan \| Shuvend... | 47.582856 |
+| 6 | Indalo - Ekanto Golaap \| OFFICIAL MUSIC VIDEO | 64.964822 |
+| 7 | rain in sylhet । sylhet agricultural University | 9.666667 |
+| 8 | Shomorpon - Owned (Audio) | 45.114178 |
+| 9 | Tomake Khujechi \| Monoshoroni \| Cover | 51.000000 |
+
