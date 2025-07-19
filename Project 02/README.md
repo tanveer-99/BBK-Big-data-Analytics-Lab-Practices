@@ -285,6 +285,7 @@ Output:
 
 <br/>
 - Is there a correlation between the number of views and the number of likes?
+
 ```python
 df_pandas = df_pandas.dropna()
 df_pandas = df_pandas[df_pandas['view_count'] > 0]
